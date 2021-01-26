@@ -25,7 +25,8 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button id="remove-iphone-amount" class="btn btn-default"><i
+                                 class="fas fa-minus"></i></button>
                            <input id="iphone-amount" type="text" class="form-control text-center" value="1">
                            <button id="add-iphone-amount" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
@@ -43,9 +44,9 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="remove-case-amount" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="case-amount" type="text" class="form-control text-center" value="1">
+                           <button id="add-case-amount" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
                         <h5>$59</h5>
@@ -80,13 +81,28 @@
 
 
    <script>
-      let addIphoneAmount = document.getElementById("add-iphone-amount");
-      addIphoneAmount.addEventListener("click",function(){
-         let iphoneAmount = document.getElementById("iphone-amount").value;
-         let iphoneAmountNumber = parseInt(iphoneAmount);
-         iphoneAmountNumber++;
-         document.getElementById("iphone-amount").value = iphoneAmountNumber;
-      })
+
+      amount("add-iphone-amount", "remove-iphone-amount", "iphone-amount");
+
+      amount("add-case-amount", "remove-case-amount", "case-amount");
+
+
+      function amount(add_amount, remove_amount, current_amount) {
+         let addAmount = document.getElementById(add_amount);
+         addAmount.addEventListener("click", function () {
+            let amount = document.getElementById(current_amount).value;
+            let amountNumber = parseInt(amount);
+            document.getElementById(current_amount).value = amountNumber + 1;
+         })
+         let removeAmount = document.getElementById(remove_amount);
+         removeAmount.addEventListener("click", function () {
+            let amount = document.getElementById(current_amount).value;
+            let amountNumber = parseInt(amount);
+            document.getElementById(current_amount).value = amountNumber - 1;
+         })
+
+      }
+
    </script>
 </body>
 
