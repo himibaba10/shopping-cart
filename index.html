@@ -30,7 +30,7 @@
                            <input id="iphone-amount" type="text" class="form-control text-center" value="1">
                            <button id="add-iphone-amount" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$<span id="iphone-price">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -49,7 +49,7 @@
                            <button id="add-case-amount" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$<span id="case-price">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -65,9 +65,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
+                        <h5>$<span id="sub-total">1278</span></h5>
                         <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$1278</h5>
                      </div>
                   </div>
                </div>
@@ -82,26 +82,60 @@
 
    <script>
 
-      amount("add-iphone-amount", "remove-iphone-amount", "iphone-amount");
+      amount("add-iphone-amount", "remove-iphone-amount", "iphone-amount", "iphone-price");
 
-      amount("add-case-amount", "remove-case-amount", "case-amount");
+      amount("add-case-amount", "remove-case-amount", "case-amount", "case-price");
 
-
-      function amount(add_amount, remove_amount, current_amount) {
+      
+      function amount(add_amount, remove_amount, current_amount, current_price) {
          let addAmount = document.getElementById(add_amount);
          addAmount.addEventListener("click", function () {
             let amount = document.getElementById(current_amount).value;
             let amountNumber = parseInt(amount);
             document.getElementById(current_amount).value = amountNumber + 1;
+            let currentPriceNumber = currentPrice(current_price);
+            let subTotalNumber = subTotal();
+            if(current_price == "iphone-price"){
+               document.getElementById(current_price).innerText = currentPriceNumber+1219;
+               document.getElementById("sub-total").innerText = subTotalNumber + 1219;
+            }
+            else {
+               document.getElementById(current_price).innerText = currentPriceNumber+59;
+               document.getElementById("sub-total").innerText = subTotalNumber + 59;
+            }
          })
+         
          let removeAmount = document.getElementById(remove_amount);
          removeAmount.addEventListener("click", function () {
             let amount = document.getElementById(current_amount).value;
             let amountNumber = parseInt(amount);
             document.getElementById(current_amount).value = amountNumber - 1;
+            let currentPriceNumber = currentPrice(current_price);            
+            let subTotalNumber = subTotal();
+            if(current_price == "iphone-price"){
+               document.getElementById(current_price).innerText = currentPriceNumber-1219;
+               document.getElementById("sub-total").innerText = subTotalNumber - 1219;
+            }
+            else{
+               document.getElementById(current_price).innerText = currentPriceNumber-59;
+               document.getElementById("sub-total").innerText = subTotalNumber - 59;
+            }
          })
 
+         function currentPrice(price){
+
+         let currentPrice = document.getElementById(price).innerText;
+         let currentPriceNumber = parseInt(currentPrice);
+         return currentPriceNumber;
       }
+         function subTotal(){
+            let subTotal = document.getElementById("sub-total").innerText;
+            let subTotalNumber = parseInt(subTotal);
+            return subTotalNumber;
+         }
+      }
+
+      
 
    </script>
 </body>
